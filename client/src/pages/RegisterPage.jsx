@@ -31,7 +31,7 @@ function Register() {
         {registerErrors.map((error, i) => (
           <Message message={error} key={i} />
         ))}
-        <h1 className="text-3xl font-bold">Register</h1>
+        <h1 className="text-3xl font-bold">Registrar usuario</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Label htmlFor="username">Username:</Label>
           <Input
@@ -76,12 +76,12 @@ function Register() {
           {errors.confirmPassword?.message && (
             <p className="text-red-500">{errors.confirmPassword?.message}</p>
           )}
-          <Button>Registrar </Button>
+          <Button>Registrar</Button>
         </form>
         <p>
-          Already Have an Account?
+          Ya tienes cuenta?
           <Link className="text-sky-500" to="/login">
-            Login
+            Iniciar sesión
           </Link>
         </p>
       </Card>

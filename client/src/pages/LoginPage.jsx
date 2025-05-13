@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Card, Message, Button, Input, Label } from "../components/ui";
 import { loginSchema } from "../schemas/auth";
-
+import { toast } from "react-toastify";
 export function LoginPage() {
   const {
     register,
@@ -17,7 +17,14 @@ export function LoginPage() {
   const { signin, errors: loginErrors, isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
-  const onSubmit = (data) => signin(data);
+  const onSubmit = async (data) => {
+    const res = await signin(data);
+    if (res) {
+      toast.success("Sesion iniciada correctamente");
+    } else {
+      toast.error("Error al iniciar sesión, credenciales incorrectas");
+    }
+  };
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -31,7 +38,7 @@ export function LoginPage() {
         {loginErrors.map((error, i) => (
           <Message message={error} key={i} />
         ))}
-        <h1 className="text-2xl font-bold">Login</h1>
+        <h1 className="text-2xl font-bold">Iniciar sesión</h1>
 
         <form onSubmit={handleSubmit(onSubmit)}>
           <Label htmlFor="email">Email:</Label>
@@ -53,11 +60,14 @@ export function LoginPage() {
           />
           <p>{errors.password?.message}</p>
 
-          <Button>Login</Button>
+          <Button>Iniciar sesión</Button>
         </form>
 
         <p className="flex gap-x-2 justify-between">
-          Don't have an account? <Link to="/register" className="text-sky-500">Sign up</Link>
+          No tienes cuenta?{" "}
+          <Link to="/register" className="text-sky-500">
+            Registrate
+          </Link>
         </p>
       </Card>
     </div>

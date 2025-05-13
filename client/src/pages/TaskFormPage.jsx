@@ -12,7 +12,7 @@ export function TaskFormPage() {
   const { createTask, getTask, updateTask } = useTasks();
   const navigate = useNavigate();
   const params = useParams();
-  
+
   const {
     register,
     setValue,
@@ -82,7 +82,7 @@ export function TaskFormPage() {
 
         <Label htmlFor="date">Date</Label>
         <Input type="date" name="date" {...register("date")} />
-        <Button>Save</Button>
+        <Button>Guardar</Button>
       </form>
     </Card>
   );
