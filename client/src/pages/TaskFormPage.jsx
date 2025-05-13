@@ -12,6 +12,7 @@ export function TaskFormPage() {
   const { createTask, getTask, updateTask } = useTasks();
   const navigate = useNavigate();
   const params = useParams();
+  
   const {
     register,
     setValue,
@@ -22,7 +23,7 @@ export function TaskFormPage() {
   const onSubmit = async (data) => {
     try {
       if (params.id) {
-        updateTask(params.id, {
+        await updateTask(params.id, {
           ...data,
           date: dayjs.utc(data.date).format(),
         });
@@ -33,10 +34,9 @@ export function TaskFormPage() {
         });
       }
 
-      // navigate("/tasks");
+      navigate("/");
     } catch (error) {
       console.log(error);
-      // window.location.href = "/";
     }
   };
 
